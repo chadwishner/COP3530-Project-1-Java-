@@ -30,7 +30,7 @@ public class SparseMatrix implements SparseInterface {
 		int col;
 		Node next;
 		
-		//constructor for specifed values
+		//constructor for specified values
 		public Node(int da, int r, int c){
 			data = da;
 			row = r;
@@ -107,26 +107,28 @@ public class SparseMatrix implements SparseInterface {
     				prev.next = add;
     				return;
     			}
+  
     			
-    			//special case if the row doesn't exist and it is the 1st row, thus the prev pointer node has not been changed, and the new node needs to be placed at head
-    			if (prev == null){
-    				head = add;
-    				add.next = cur;
-    				return;
-    			}
-    			
-    			//special case if row doesn't exist and it is between 2 rows, place it between the 2 rows
-    			if (cur.row > row){
+    			//special case if row doesn't exist and it is between 2 rows, place it between the 2 rows    			if (cur.row > row){
+    			if (cur.row > row && prev != null){
     				prev.next = add;
     				add.next = cur;
+    				return;
     			} else {
     				
     				//find the correct col
-    				while (cur != null && cur.col < col){
+    				while (cur != null && cur.row == row && cur.col < col){
     					prev = cur;
                 		cur = cur.next;
         			} 
-    				
+    				       			
+    				//special case if the 1st row doesn't exist, thus the prev pointer node has not been changed, and the new node needs to be placed at head
+        			if (prev == null){
+        				head = add;
+        				add.next = cur;
+        				return;
+        			}
+        			
     				//if final col isn't there, and it is at the end of the list, place the node at the tail
     				if (cur == null){
         				prev.next = add;
@@ -134,7 +136,7 @@ public class SparseMatrix implements SparseInterface {
         			}
     				
     				//if the node already exists, overwrite that node
-    				if (cur.col == col){
+    				if (cur.row == row && cur.col == col){
         				cur.data = data;
         				
         			//normal case of simply adding the new node in the correct space
@@ -223,12 +225,14 @@ public class SparseMatrix implements SparseInterface {
     	Node cur = head;
     	
     	//base case
-    	if (this.size == 1){
+    	if (head != null && this.size == 1){
     		return head.data;
+    	} else if (head == null){
+    		return 0;
     	}
     	
     	//run through the first row
-    	while (cur.row == 0){
+    	while (cur != null && cur.row == 0){
     		
     		//algorithm with recursive call
     		sum += (int)Math.pow(-1, cur.row + cur.col) * cur.data * minor(cur.row, cur.col).determinant();
