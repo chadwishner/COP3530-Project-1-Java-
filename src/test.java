@@ -65,14 +65,14 @@ public class test {
 
        myTest.setSize(5);
        
-    //row 0
+   //row 0
        myTest.addElement(0, 0, 4);
        myTest.addElement(0, 1, 6);
        myTest.addElement(0, 2, 9); 
        myTest.addElement(0, 3, 10);      
-       myTest.addElement(0, 4, 42);
+       myTest.addElement(0, 4, 42); 
        
-    //row 1
+   //row 1
        myTest.addElement(1, 0, 3);
        myTest.addElement(1, 1, 5);
        myTest.addElement(1, 2, 2);

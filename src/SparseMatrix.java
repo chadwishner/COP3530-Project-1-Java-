@@ -114,40 +114,40 @@ public class SparseMatrix implements SparseInterface {
     				prev.next = add;
     				add.next = cur;
     				return;
-    			} else {
-    				
-    				//find the correct col
-    				while (cur != null && cur.row == row && cur.col < col){
-    					prev = cur;
-                		cur = cur.next;
-        			} 
-    				       			
-    				//special case if the 1st row doesn't exist, thus the prev pointer node has not been changed, and the new node needs to be placed at head
-        			if (prev == null){
-        				head = add;
-        				add.next = cur;
-        				return;
-        			}
-        			
-    				//if final col isn't there, and it is at the end of the list, place the node at the tail
-    				if (cur == null){
-        				prev.next = add;
-        				return;
-        			}
-    				
-    				//if the node already exists, overwrite that node
-    				if (cur.row == row && cur.col == col){
-        				cur.data = data;
-        				
-        			//normal case of simply adding the new node in the correct space
-        			} else {
-        				prev.next = add;
-        				add.next = cur;
-        			}
     			}
+    				
+    			//find the correct col
+    			while (cur != null && cur.row == row && cur.col < col){
+    				prev = cur;
+                	cur = cur.next;
+        		} 
+    				       			
+    			//special case if the 1st row doesn't exist, thus the prev pointer node has not been changed, and the new node needs to be placed at head
+        		if (prev == null){
+        			head = add;
+        			add.next = cur;
+        			return;
+        		}
+        			
+    			//if final col isn't there, and it is at the end of the list, place the node at the tail
+    			if (cur == null){
+        			prev.next = add;
+        			return;
+        		}
+    				
+    			//if the node already exists, overwrite that node
+    			if (cur.row == row && cur.col == col){
+        			cur.data = data;
+        				
+        		//normal case of simply adding the new node in the correct space
+        		} else {
+        			prev.next = add;
+        			add.next = cur;
+        		}
     		}
     	}
     }
+
     
     /** Remove (make 0) the element at the specified row and column. Throws an error if row/column combination is out of bounds.
      * 	@param int row, int col (of the desired element)
