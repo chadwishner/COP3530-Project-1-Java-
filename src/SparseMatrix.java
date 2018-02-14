@@ -3,7 +3,6 @@
  */
 public class SparseMatrix implements SparseInterface {	
 	Node head;
-//	Node tail;
 		
 	int size;
 	
@@ -14,7 +13,6 @@ public class SparseMatrix implements SparseInterface {
 	 */
 	public SparseMatrix(){
 		head = null;
-//		tail = null;
 		
 		//default size 5
 		size = 5;
@@ -92,7 +90,6 @@ public class SparseMatrix implements SparseInterface {
     		//if head is empty, make the head the new node
     		if (head == null){
     			head = add;
-//    			tail = add;
     		} else {
     			
     			//create pointer nodes to increment through
@@ -146,9 +143,6 @@ public class SparseMatrix implements SparseInterface {
         				add.next = cur;
         			}
     			}
-
-//    			tail.next = add;
-//    			tail = add;
     		}
     	}
     }
@@ -181,9 +175,6 @@ public class SparseMatrix implements SparseInterface {
     		if (cur == head){
     			head = head.next;
     		}
-//   		if (cur == tail){
-//   			tail = prev;
-//    		}
     		
     		//delete cur
     		cur = null;
@@ -224,14 +215,17 @@ public class SparseMatrix implements SparseInterface {
      *	O(n!)
      */
     public int determinant(){
-    	//DO I NEED TO ADD A BASE CASE
-    	
-    	
+    	    	
     	//store sum
     	int sum = 0;
     	
     	//create pointer node
     	Node cur = head;
+    	
+    	//base case
+    	if (this.size == 1){
+    		return head.data;
+    	}
     	
     	//run through the first row
     	while (cur.row == 0){
