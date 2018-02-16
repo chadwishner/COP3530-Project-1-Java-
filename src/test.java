@@ -102,7 +102,7 @@ public class test {
        
     //remove function test
        myTest.removeElement(1, 2);
-       
+
     //to string
        System.out.println("\n\nThis is the Tests to check your own stuff");
        System.out.println("\nYour OG matrix: \n" + myTest.toString());
