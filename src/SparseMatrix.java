@@ -9,7 +9,6 @@ public class SparseMatrix implements SparseInterface {
 	/**	default constructor Sparse Matrix
 	 * 	default size to 5	
 	 * 	includes Node head and int size
-	 * 	
 	 */
 	public SparseMatrix(){
 		head = null;
@@ -48,6 +47,7 @@ public class SparseMatrix implements SparseInterface {
 	/** Clear the matrix of all entries (make all entries 0)
 	 * 	O(1)
      */
+	@Override
     public void clear(){
     	//setting head to null clears reference to the rest of the nodes, garbage collector will collect
     	this.head = null;
@@ -57,6 +57,7 @@ public class SparseMatrix implements SparseInterface {
      * 	@param int size
      * 	O(1)
      */
+    @Override
     public void setSize(int size){
     	//set size to specified value
     	this.size = size;
@@ -68,8 +69,9 @@ public class SparseMatrix implements SparseInterface {
     /** Adds an element to the row and column passed as arguments (overwrites if element is already present at that position). Throws an error if row/column 
      * 	combination is out of bounds. Adds values in order of row then column (ie. row 0 col 0, row 0 col 1, row 0 col 2, row 1 col 0, row 1 col 1, row 1 col 2...) 
      * 	@param int row, int col, int data
-     * 	O(n)
+     * 	O(n^2) where n is the size of the matrix
      */
+    @Override
     public void addElement(int row, int col, int data){
     	//add in order
     	
@@ -151,8 +153,9 @@ public class SparseMatrix implements SparseInterface {
     
     /** Remove (make 0) the element at the specified row and column. Throws an error if row/column combination is out of bounds.
      * 	@param int row, int col (of the desired element)
-     * 	O(n)
+     * 	O(n^2) where n is the size of the matrix
      */
+    @Override
     public void removeElement(int row, int col){
     	
     	//check if out of bound combination
@@ -187,8 +190,9 @@ public class SparseMatrix implements SparseInterface {
     /** Returns the element at the specified row and column. Throws an error if row/column combination is out of bounds.
      * 	@return int data
      * 	@param int row, int col (of the desired element)
-     * 	O(n)
+     * 	O(n^2) where n is the size of the matrix
      */
+    @Override
     public int getElement(int row, int col){
     	
     	//check if out of bound combination
@@ -214,8 +218,9 @@ public class SparseMatrix implements SparseInterface {
 
     /** Calculate the determinate recursively
      * 	@return  int the determinant of the matrix calculated recursively
-     *	O(n!)
+     *	O(n^2*n!) where n is the size of the matrix
      */
+    @Override
     public int determinant(){
     	    	
     	//store sum
@@ -246,8 +251,9 @@ public class SparseMatrix implements SparseInterface {
     /** Returns a new matrix which is the minor of the original (See project description for minor definition).
      * 	@return SparceInterface (linkedlist)
      * 	@param int row, int col (to be removed)
-     * 	O(n)
+     * 	O(n^2) where n is the size of the matrix
      */
+    @Override
     public SparseInterface minor(int row, int col){
     	
     	//create new linked list to store minor
@@ -295,8 +301,9 @@ public class SparseMatrix implements SparseInterface {
      * 	Each line should be in the format "row column data" where row and column are the "coordinate" of the data and all are separated by spaces. An empty matrix should 
      * 	return an empty string. The print is be from left to right and from top to bottom (like reading a book) i.e. the matrix
      * 	@return String
-     * 	O(n)
+     * 	O(n^2) where n is the size of the matrix
      */
+    @Override
     public String toString(){
     	
     	//create empty string and cur node
@@ -317,6 +324,7 @@ public class SparseMatrix implements SparseInterface {
      * 	@return int size
      * 	O(1)
      */
+    @Override
     public int getSize(){
     	
     	//return size
