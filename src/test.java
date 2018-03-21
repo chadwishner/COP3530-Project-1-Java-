@@ -75,7 +75,7 @@ public class test {
    //row 1
        myTest.addElement(1, 0, 3);
        myTest.addElement(1, 1, 5);
-       myTest.addElement(1, 2, 2);
+       myTest.addElement(1, 1, 2);
        myTest.addElement(1, 3, 31);
        myTest.addElement(1, 4, 78);
        

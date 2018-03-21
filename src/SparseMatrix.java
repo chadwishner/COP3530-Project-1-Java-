@@ -111,7 +111,7 @@ public class SparseMatrix implements SparseInterface {
     			}
   
     			
-    			//special case if row doesn't exist and it is between 2 rows, place it between the 2 rows    			if (cur.row > row){
+    			//special case if row doesn't exist and it is between 2 rows, place it between the 2 rows
     			if (cur.row > row && prev != null){
     				prev.next = add;
     				add.next = cur;
@@ -125,7 +125,7 @@ public class SparseMatrix implements SparseInterface {
         		} 
     				       			
     			//special case if the 1st row doesn't exist, thus the prev pointer node has not been changed, and the new node needs to be placed at head
-        		if (prev == null){
+        		if (prev == null && (cur.row != row || cur.col != col)){
         			head = add;
         			add.next = cur;
         			return;
@@ -140,6 +140,7 @@ public class SparseMatrix implements SparseInterface {
     			//if the node already exists, overwrite that node
     			if (cur.row == row && cur.col == col){
         			cur.data = data;
+        			return;
         				
         		//normal case of simply adding the new node in the correct space
         		} else {
@@ -168,9 +169,13 @@ public class SparseMatrix implements SparseInterface {
     		Node prev = new Node();
     		
     		//find the right row/col combination
-    		while (cur.row != row || cur.col != col){
+    		while (cur != null && (cur.row != row || cur.col != col)){
     			prev = cur;
     			cur = cur.next;
+    		}
+    		
+    		if (cur == null){
+    			return;
     		}
     		
     		//skip over cur
@@ -204,10 +209,14 @@ public class SparseMatrix implements SparseInterface {
     		Node cur = head;
     		
     		//find the right row/col combination
-    		while (cur.row != row || cur.col != col){
+    		while (cur != null && (cur.row != row || cur.col != col)){
     			cur = cur.next;
     		}
 
+    		if (cur == null){
+    			return 0;
+    		}
+    		
     		//return data
     		return cur.data;
     	}
